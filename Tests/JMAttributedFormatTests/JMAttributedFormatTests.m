@@ -15,6 +15,18 @@
 @end
 
 
+@interface JMCustomAttributedDescription : NSObject
+@property (nonatomic) NSString *stringValue;
+@end
+
+@implementation JMCustomAttributedDescription
+- (NSAttributedString *)attributedDescription
+{
+    return [[NSAttributedString alloc] initWithString:self.stringValue attributes:@{@"JMCustomClass": [self class]}];
+}
+@end
+
+
 @implementation JMAttributedFormatTests
 
 - (void)testInstancetype
@@ -99,6 +111,28 @@
 
     NSAttributedString *twoOne = [NSAttributedString attributedStringWithFormat:@"A %2$@ B %1$@", one, two];
     XCTAssertEqualObjects(twoOne.string, @"A two B one");
+}
+
+- (void)testCustomAttributedDescription
+{
+    NSDictionary *baseAttributes = @{@"BaseAttribute": @YES};
+
+    NSString *plain = @"plain";
+    JMCustomAttributedDescription *custom = [JMCustomAttributedDescription new];
+    custom.stringValue = @"custom";
+
+    NSAttributedString *plainCustom = [NSAttributedString attributedStringWithBaseAttributes:baseAttributes format:@"A %1$@ B %2$@", plain, custom];
+    XCTAssertEqualObjects(plainCustom.string, @"A plain B custom");
+    XCTAssertEqualObjects(plainCustom.description,
+                          @"A plain B {\n    BaseAttribute = 1;\n}"
+                          @"custom{\n    JMCustomClass = JMCustomAttributedDescription;\n}");
+
+    NSAttributedString *customPlain = [NSAttributedString attributedStringWithBaseAttributes:baseAttributes format:@"A %2$@ B %1$@", plain, custom];
+    XCTAssertEqualObjects(customPlain.string, @"A custom B plain");
+    XCTAssertEqualObjects(customPlain.description,
+                          @"A {\n    BaseAttribute = 1;\n}"
+                          @"custom{\n    JMCustomClass = JMCustomAttributedDescription;\n}"
+                          @" B plain{\n    BaseAttribute = 1;\n}");
 }
 
 - (void)testInvalidFormats
