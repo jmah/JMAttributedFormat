@@ -72,7 +72,7 @@
     NSString *plainInner = @"plain";
     NSAttributedString *attrInner = [[NSAttributedString alloc] initWithString:@"attributed" attributes:@{@"IsSubstitute": @YES}];
 
-    NSAttributedString *as = [NSAttributedString attributedStringWithBaseAttributes:baseAttributes format:@"base %@ %@", plainInner, attrInner];
+    NSAttributedString *as = [[NSAttributedString alloc] initWithBaseAttributes:baseAttributes format:@"base %@ %@", plainInner, attrInner];
     XCTAssertEqualObjects(as.string, @"base plain attributed");
 
     __block NSInteger attributeCount = 0;
@@ -111,7 +111,13 @@
 
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"mixing plain %@ and positional %1$@"], NSException, NSInvalidArgumentException);
 
+    XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"illegal position %0$@"], NSException, NSInvalidArgumentException);
+
+    XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"illegal position %-1$@"], NSException, NSInvalidArgumentException);
+
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"unsupported formats %d"], NSException, NSInvalidArgumentException);
+
+    XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"unsupported positional format %1$d"], NSException, NSInvalidArgumentException);
 #pragma clang diagnostic pop
 }
 
