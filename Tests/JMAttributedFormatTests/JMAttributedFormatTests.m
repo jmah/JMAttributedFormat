@@ -16,16 +16,34 @@
 
 
 @interface JMCustomAttributedDescription : NSObject
-@property (nonatomic) NSString *stringValue;
+@property (nonatomic) id innerValue;
 @end
 
 @implementation JMCustomAttributedDescription
 - (NSAttributedString *)attributedDescription
 {
-    if (!self.stringValue) {
+    if (!self.innerValue) {
         return nil;
     }
-    return [[NSAttributedString alloc] initWithString:self.stringValue attributes:@{@"JMCustomClass": [self class]}];
+    return [[NSAttributedString alloc] initWithString:[self.innerValue description] attributes:@{@"JMCustomClass": [self class]}];
+}
+@end
+
+
+@interface JMCustomAttributedDescriptionWithLocale : NSObject
+@property (nonatomic) id innerValue;
+@end
+
+@implementation JMCustomAttributedDescriptionWithLocale
+- (NSAttributedString *)attributedDescription
+{ return [self attributedDescriptionWithLocale:nil]; }
+
+- (NSAttributedString *)attributedDescriptionWithLocale:(NSLocale *)locale
+{
+    if (!self.innerValue) {
+        return nil;
+    }
+    return [[NSAttributedString alloc] initWithString:[self.innerValue descriptionWithLocale:locale] attributes:@{@"JMCustomClass": [self class]}];
 }
 @end
 
@@ -122,7 +140,7 @@
 
     NSString *plain = @"plain";
     JMCustomAttributedDescription *custom = [JMCustomAttributedDescription new];
-    custom.stringValue = @"custom";
+    custom.innerValue = @"custom";
 
     NSAttributedString *plainCustom = [NSAttributedString attributedStringWithBaseAttributes:baseAttributes format:@"A %1$@ B %2$@", plain, custom];
     XCTAssertEqualObjects(plainCustom.string, @"A plain B custom");
@@ -141,11 +159,62 @@
 - (void)testNilArguments
 {
     NSAttributedString *oneNil = [NSAttributedString attributedStringWithFormat:@"A %@ B %@", @"one", nil];
+    NSString *plainOneNil = [NSString stringWithFormat:@"A %@ B %@", @"one", nil];
     XCTAssertEqualObjects(oneNil.string, @"A one B (null)");
+    XCTAssertEqualObjects(oneNil.string, plainOneNil);
 
     JMCustomAttributedDescription *emptyCustom = [JMCustomAttributedDescription new];
     NSAttributedString *customNil = [NSAttributedString attributedStringWithFormat:@"custom %@", emptyCustom];
     XCTAssertEqualObjects(customNil.string, @"custom (null)");
+}
+
+- (void)testLocalizedSubstitution
+{
+    NSNumber *number = @(1234.5);
+
+    NSLocale *enUS = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+    NSLocale *frFR = [NSLocale localeWithLocaleIdentifier:@"fr_FR"];
+
+    NSString *plainSystem = [[NSString alloc] initWithFormat:@"format %@", number];
+    NSAttributedString *attrSystem = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@", number];
+    XCTAssertEqualObjects(plainSystem, @"format 1234.5"); // no comma
+    XCTAssertEqualObjects(plainSystem, attrSystem.string);
+
+    NSString *plainEnUS = [[NSString alloc] initWithFormat:@"format %@" locale:enUS, number];
+    NSAttributedString *attrEnUS = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@" locale:enUS, number];
+    XCTAssertEqualObjects(plainEnUS, @"format 1,234.5");
+    XCTAssertEqualObjects(plainEnUS, attrEnUS.string);
+
+    NSString *plainFrFR = [[NSString alloc] initWithFormat:@"format %@" locale:frFR, number];
+    NSAttributedString *attrFrFR = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@" locale:frFR, number];
+    XCTAssertEqualObjects(plainFrFR, @"format 1 234,5"); // nbsp as thousands separator
+    XCTAssertEqualObjects(plainFrFR, attrFrFR.string);
+}
+
+- (void)testCustomLocalizedSubstitution
+{
+    NSDictionary *baseAttributes = @{@"BaseAttribute": @YES};
+    NSNumber *number = @(1234.5);
+    NSLocale *enUS = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+    NSLocale *frFR = [NSLocale localeWithLocaleIdentifier:@"fr_FR"];
+
+    JMCustomAttributedDescriptionWithLocale *custom = [JMCustomAttributedDescriptionWithLocale new];
+    custom.innerValue = number;
+
+    NSAttributedString *attrCustomSystem = [[NSAttributedString alloc] initWithBaseAttributes:baseAttributes format:@"format %@", custom];
+    XCTAssertEqualObjects(attrCustomSystem.description,
+                          @"format {\n    BaseAttribute = 1;\n}"
+                          @"1234.5{\n    JMCustomClass = JMCustomAttributedDescriptionWithLocale;\n}");
+
+    NSAttributedString *attrCustomEnUS = [[NSAttributedString alloc] initWithBaseAttributes:baseAttributes format:@"format %@" locale:enUS, custom];
+    XCTAssertEqualObjects(attrCustomEnUS.description,
+                          @"format {\n    BaseAttribute = 1;\n}"
+                          @"1,234.5{\n    JMCustomClass = JMCustomAttributedDescriptionWithLocale;\n}");
+
+    NSAttributedString *attrCustomFrFR = [[NSAttributedString alloc] initWithBaseAttributes:baseAttributes format:@"format %@" locale:frFR, custom];
+    XCTAssertEqualObjects(attrCustomFrFR.description,
+                          @"format {\n    BaseAttribute = 1;\n}"
+                          @"1 234,5{\n    JMCustomClass = JMCustomAttributedDescriptionWithLocale;\n}");
 }
 
 - (void)testInvalidFormats

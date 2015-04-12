@@ -11,6 +11,8 @@
 
 @implementation NSAttributedString (JMAttributedFormat)
 
+#pragma mark Formatting
+
 + (instancetype)attributedStringWithFormat:(NSString *)format, ...
 {
     va_list args;
@@ -39,6 +41,41 @@
 }
 
 - (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)format arguments:(va_list)argList
+{
+    return [self initWithBaseAttributes:baseAttributes format:format locale:nil arguments:argList];
+}
+
+
+#pragma mark Localized Formatting
+
++ (nullable instancetype)localizedStringWithFormat:(nonnull NSString *)format, ...
+{
+    va_list args;
+    va_start(args, format);
+    NSAttributedString *as = [[self alloc] initWithBaseAttributes:nil format:format locale:[NSLocale currentLocale] arguments:args];
+    va_end(args);
+    return as;
+}
+
++ (nullable instancetype)localizedStringWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)format, ...
+{
+    va_list args;
+    va_start(args, format);
+    NSAttributedString *as = [[self alloc] initWithBaseAttributes:baseAttributes format:format locale:[NSLocale currentLocale] arguments:args];
+    va_end(args);
+    return as;
+}
+
+- (nullable instancetype)initWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)format locale:(nullable NSLocale *)locale, ...
+{
+    va_list args;
+    va_start(args, locale);
+    self = [self initWithBaseAttributes:baseAttributes format:format locale:locale arguments:args];
+    va_end(args);
+    return self;
+}
+
+- (nullable instancetype)initWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)format locale:(nullable NSLocale *)locale arguments:(va_list)argList
 {
     NSParameterAssert(format);
 
@@ -108,19 +145,9 @@
     // Step 2: Read arguments into array of NSAttributedString
     NSMutableArray *attributedStringArguments = [NSMutableArray arrayWithCapacity:maxArgumentPosition];
     // Add literal percent at index 0
-    [attributedStringArguments addObject:[[NSAttributedString alloc] initWithString:@"%" attributes:baseAttributes]];
-    NSAttributedString *attributedNullValue = [[NSAttributedString alloc] initWithString:@"(null)" attributes:baseAttributes];
-
+    [attributedStringArguments addObject:attributedStringForArgument(@"%", baseAttributes, locale)];
     for (NSInteger i = 0; i < maxArgumentPosition; i++) {
-        id arg = va_arg(argList, id);
-        NSAttributedString *attributedArgValue;
-        if ([arg respondsToSelector:@selector(attributedDescription)]) {
-            attributedArgValue = [arg attributedDescription] ? : attributedNullValue;
-        } else {
-            NSString *string = [arg description];
-            attributedArgValue = string ? [[NSAttributedString alloc] initWithString:string attributes:baseAttributes] : attributedNullValue;
-        }
-        [attributedStringArguments addObject:attributedArgValue];
+        [attributedStringArguments addObject:attributedStringForArgument(va_arg(argList, id), baseAttributes, locale)];
     }
 
 
@@ -144,6 +171,33 @@
     
     return mutableInstance;
 }
+
+
+static NSAttributedString *__nonnull attributedStringForArgument(id arg, NSDictionary *baseAttributes, NSLocale *locale)
+{
+    NSAttributedString *attributedString;
+    if ([arg respondsToSelector:@selector(attributedDescriptionWithLocale:)]) {
+        attributedString = [arg attributedDescriptionWithLocale:locale];
+    } else if ([arg respondsToSelector:@selector(attributedDescription)]) {
+        attributedString = [arg attributedDescription];
+    } else {
+        NSString *plainString;
+        if ([arg respondsToSelector:@selector(descriptionWithLocale:)]) {
+            plainString = [arg descriptionWithLocale:locale];
+        } else {
+            plainString = [arg description];
+        }
+
+        if (plainString) {
+            attributedString = [[NSAttributedString alloc] initWithString:plainString attributes:baseAttributes];
+        }
+    }
+
+    return attributedString ? : [[NSAttributedString alloc] initWithString:@"(null)" attributes:baseAttributes];
+}
+
+
+#pragma mark Customizing Attributed Format String Substitution
 
 - (NSAttributedString *)attributedDescription
 {
