@@ -17,9 +17,12 @@
 
 @implementation JMAttributedFormatTests
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testInstancetype
+{
+    for (Class c in @[[NSAttributedString class], [NSMutableAttributedString class], [NSTextStorage class]]) {
+        NSAttributedString *as = [c attributedStringWithBaseAttributes:nil format:@"test"];
+        XCTAssert([as isKindOfClass:c]);
+    }
 }
 
 @end
