@@ -86,8 +86,8 @@
      */
 
     BOOL usingExplicitPositions = NO;
-    NSMutableArray *formatRanges = [NSMutableArray new];
-    NSMutableArray *argumentPositions = [NSMutableArray new]; // 1-based (like printf).
+    NSMutableArray *formatSpecifierRanges = [NSMutableArray new];
+    NSMutableArray *formatArgumentPositions = [NSMutableArray new]; // 1-based (like printf)
     NSInteger maxArgumentPosition = 0;
 
     // Step 1: Scan the format string for format specifiers (while validating it).
@@ -116,7 +116,7 @@
             }
 
         } else if ([scanner scanString:@"@" intoString:NULL]) {
-            argumentPosition = argumentPositions.count + 1;
+            argumentPosition = formatArgumentPositions.count + 1;
 
         } else if ([scanner scanString:@"%" intoString:NULL]) { // literal percent
             argumentPosition = 0;
@@ -136,10 +136,10 @@
         }
 
         maxArgumentPosition = MAX(maxArgumentPosition, argumentPosition);
-        [argumentPositions addObject:@(argumentPosition)];
-        [formatRanges addObject:[NSValue valueWithRange:NSMakeRange(percentStart, scanner.scanLocation - percentStart)]];
+        [formatArgumentPositions addObject:@(argumentPosition)];
+        [formatSpecifierRanges addObject:[NSValue valueWithRange:NSMakeRange(percentStart, scanner.scanLocation - percentStart)]];
     }
-    NSAssert(formatRanges.count == argumentPositions.count, nil);
+    NSAssert(formatSpecifierRanges.count == formatArgumentPositions.count, nil);
 
 
     // Step 2: Read arguments into array of NSAttributedString
@@ -162,8 +162,8 @@
     mutableInstance = [mutableInstance initWithString:format attributes:baseAttributes];
 
     [mutableInstance beginEditing];
-    [formatRanges enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSValue *range, NSUInteger index, BOOL *stop) {
-        NSInteger argumentPosition = ((NSNumber *)argumentPositions[index]).integerValue;
+    [formatSpecifierRanges enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSValue *range, NSUInteger index, BOOL *stop) {
+        NSInteger argumentPosition = ((NSNumber *)formatArgumentPositions[index]).integerValue;
         NSAttributedString *substituteAttributedString = attributedStringArguments[argumentPosition];
         [mutableInstance replaceCharactersInRange:range.rangeValue withAttributedString:substituteAttributedString];
     }];
