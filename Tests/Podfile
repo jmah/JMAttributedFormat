@@ -1,0 +1,3 @@
+target 'JMAttributedFormatTests' do
+  pod 'JMAttributedFormat', :path => '../'
+end

@@ -1,0 +1,325 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B82EDB11ADA096A0079A2CE /* JMAttributedFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B82EDB01ADA096A0079A2CE /* JMAttributedFormatTests.m */; };
+		7255BA5DA49FDCC24D3C768C /* libPods-JMAttributedFormatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8704F893CFA930DD4FA88229 /* libPods-JMAttributedFormatTests.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03418B5C869E8D384A798AE3 /* Pods-JMAttributedFormatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMAttributedFormatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JMAttributedFormatTests/Pods-JMAttributedFormatTests.release.xcconfig"; sourceTree = "<group>"; };
+		075D251BFFBA499BBEA08C78 /* Pods-JMAttributedFormatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMAttributedFormatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JMAttributedFormatTests/Pods-JMAttributedFormatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B82EDAB1ADA096A0079A2CE /* JMAttributedFormatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JMAttributedFormatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B82EDAF1ADA096A0079A2CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B82EDB01ADA096A0079A2CE /* JMAttributedFormatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAttributedFormatTests.m; sourceTree = "<group>"; };
+		8704F893CFA930DD4FA88229 /* libPods-JMAttributedFormatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMAttributedFormatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0B82EDA81ADA096A0079A2CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7255BA5DA49FDCC24D3C768C /* libPods-JMAttributedFormatTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B82EDA01ADA08050079A2CE = {
+			isa = PBXGroup;
+			children = (
+				0B82EDAD1ADA096A0079A2CE /* JMAttributedFormatTests */,
+				0B82EDAC1ADA096A0079A2CE /* Products */,
+				5266C2187FF372F94D441843 /* Pods */,
+				1537E04A08AB8B93F9A83EA6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0B82EDAC1ADA096A0079A2CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B82EDAB1ADA096A0079A2CE /* JMAttributedFormatTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0B82EDAD1ADA096A0079A2CE /* JMAttributedFormatTests */ = {
+			isa = PBXGroup;
+			children = (
+				0B82EDB01ADA096A0079A2CE /* JMAttributedFormatTests.m */,
+				0B82EDAE1ADA096A0079A2CE /* Supporting Files */,
+			);
+			path = JMAttributedFormatTests;
+			sourceTree = "<group>";
+		};
+		0B82EDAE1ADA096A0079A2CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B82EDAF1ADA096A0079A2CE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1537E04A08AB8B93F9A83EA6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8704F893CFA930DD4FA88229 /* libPods-JMAttributedFormatTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5266C2187FF372F94D441843 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				075D251BFFBA499BBEA08C78 /* Pods-JMAttributedFormatTests.debug.xcconfig */,
+				03418B5C869E8D384A798AE3 /* Pods-JMAttributedFormatTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0B82EDAA1ADA096A0079A2CE /* JMAttributedFormatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B82EDB21ADA096A0079A2CE /* Build configuration list for PBXNativeTarget "JMAttributedFormatTests" */;
+			buildPhases = (
+				FA7BB8769A37B607AB92D045 /* Check Pods Manifest.lock */,
+				0B82EDA71ADA096A0079A2CE /* Sources */,
+				0B82EDA81ADA096A0079A2CE /* Frameworks */,
+				0B82EDA91ADA096A0079A2CE /* Resources */,
+				A209FB0DD6A8A3CDEF9F27E7 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JMAttributedFormatTests;
+			productName = JMAttributedFormatTests;
+			productReference = 0B82EDAB1ADA096A0079A2CE /* JMAttributedFormatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0B82EDA11ADA08050079A2CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				TargetAttributes = {
+					0B82EDAA1ADA096A0079A2CE = {
+						CreatedOnToolsVersion = 6.3;
+					};
+				};
+			};
+			buildConfigurationList = 0B82EDA41ADA08050079A2CE /* Build configuration list for PBXProject "JMAttributedFormat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0B82EDA01ADA08050079A2CE;
+			productRefGroup = 0B82EDAC1ADA096A0079A2CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0B82EDAA1ADA096A0079A2CE /* JMAttributedFormatTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0B82EDA91ADA096A0079A2CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A209FB0DD6A8A3CDEF9F27E7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JMAttributedFormatTests/Pods-JMAttributedFormatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA7BB8769A37B607AB92D045 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B82EDA71ADA096A0079A2CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B82EDB11ADA096A0079A2CE /* JMAttributedFormatTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0B82EDA51ADA08050079A2CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		0B82EDA61ADA08050079A2CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		0B82EDB31ADA096A0079A2CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 075D251BFFBA499BBEA08C78 /* Pods-JMAttributedFormatTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = JMAttributedFormatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0B82EDB41ADA096A0079A2CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03418B5C869E8D384A798AE3 /* Pods-JMAttributedFormatTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = JMAttributedFormatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0B82EDA41ADA08050079A2CE /* Build configuration list for PBXProject "JMAttributedFormat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B82EDA51ADA08050079A2CE /* Debug */,
+				0B82EDA61ADA08050079A2CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		0B82EDB21ADA096A0079A2CE /* Build configuration list for PBXNativeTarget "JMAttributedFormatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B82EDB31ADA096A0079A2CE /* Debug */,
+				0B82EDB41ADA096A0079A2CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0B82EDA11ADA08050079A2CE /* Project object */;
+}
