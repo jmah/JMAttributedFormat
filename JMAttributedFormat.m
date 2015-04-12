@@ -106,17 +106,21 @@
 
 
     // Step 2: Read arguments into array of NSAttributedString
-    NSMutableArray *attributedStringArguments = [NSMutableArray new]; // 0-based
+    NSMutableArray *attributedStringArguments = [NSMutableArray arrayWithCapacity:maxArgumentPosition];
     // Add literal percent at index 0
     [attributedStringArguments addObject:[[NSAttributedString alloc] initWithString:@"%" attributes:baseAttributes]];
+    NSAttributedString *attributedNullValue = [[NSAttributedString alloc] initWithString:@"(null)" attributes:baseAttributes];
+
     for (NSInteger i = 0; i < maxArgumentPosition; i++) {
         id arg = va_arg(argList, id);
+        NSAttributedString *attributedArgValue;
         if ([arg respondsToSelector:@selector(attributedDescription)]) {
-            [attributedStringArguments addObject:[arg attributedDescription]];
+            attributedArgValue = [arg attributedDescription] ? : attributedNullValue;
         } else {
-            NSString *string = [arg description] ? : @"(null)";
-            [attributedStringArguments addObject:[[NSAttributedString alloc] initWithString:string attributes:baseAttributes]];
+            NSString *string = [arg description];
+            attributedArgValue = string ? [[NSAttributedString alloc] initWithString:string attributes:baseAttributes] : attributedNullValue;
         }
+        [attributedStringArguments addObject:attributedArgValue];
     }
 
 

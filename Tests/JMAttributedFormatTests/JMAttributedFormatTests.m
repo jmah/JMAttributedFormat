@@ -22,6 +22,9 @@
 @implementation JMCustomAttributedDescription
 - (NSAttributedString *)attributedDescription
 {
+    if (!self.stringValue) {
+        return nil;
+    }
     return [[NSAttributedString alloc] initWithString:self.stringValue attributes:@{@"JMCustomClass": [self class]}];
 }
 @end
@@ -133,6 +136,16 @@
                           @"A {\n    BaseAttribute = 1;\n}"
                           @"custom{\n    JMCustomClass = JMCustomAttributedDescription;\n}"
                           @" B plain{\n    BaseAttribute = 1;\n}");
+}
+
+- (void)testNilArguments
+{
+    NSAttributedString *oneNil = [NSAttributedString attributedStringWithFormat:@"A %@ B %@", @"one", nil];
+    XCTAssertEqualObjects(oneNil.string, @"A one B (null)");
+
+    JMCustomAttributedDescription *emptyCustom = [JMCustomAttributedDescription new];
+    NSAttributedString *customNil = [NSAttributedString attributedStringWithFormat:@"custom %@", emptyCustom];
+    XCTAssertEqualObjects(customNil.string, @"custom (null)");
 }
 
 - (void)testInvalidFormats
