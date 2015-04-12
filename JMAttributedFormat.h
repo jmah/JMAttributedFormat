@@ -16,6 +16,7 @@
 
 @interface NSAttributedString (JMAttributedFormat)
 
++ (instancetype)attributedStringWithFormat:(NSString *)formatString, ... NS_FORMAT_FUNCTION(1,2);
 + (instancetype)attributedStringWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)formatString, ... NS_FORMAT_FUNCTION(2,3);
 - (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)formatString, ... NS_FORMAT_FUNCTION(2,3);
 - (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)formatString arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
