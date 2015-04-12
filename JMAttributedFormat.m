@@ -11,36 +11,36 @@
 
 @implementation NSAttributedString (JMAttributedFormat)
 
-+ (instancetype)attributedStringWithFormat:(NSString *)formatString, ...
++ (instancetype)attributedStringWithFormat:(NSString *)format, ...
 {
     va_list args;
-    va_start(args, formatString);
-    NSAttributedString *as = [[self alloc] initWithBaseAttributes:nil format:formatString arguments:args];
+    va_start(args, format);
+    NSAttributedString *as = [[self alloc] initWithBaseAttributes:nil format:format arguments:args];
     va_end(args);
     return as;
 }
 
-+ (instancetype)attributedStringWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)formatString, ...
++ (instancetype)attributedStringWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)format, ...
 {
     va_list args;
-    va_start(args, formatString);
-    NSAttributedString *as = [[self alloc] initWithBaseAttributes:baseAttributes format:formatString arguments:args];
+    va_start(args, format);
+    NSAttributedString *as = [[self alloc] initWithBaseAttributes:baseAttributes format:format arguments:args];
     va_end(args);
     return as;
 }
 
-- (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)formatString, ...
+- (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)format, ...
 {
     va_list args;
-    va_start(args, formatString);
-    self = [self initWithBaseAttributes:baseAttributes format:formatString arguments:args];
+    va_start(args, format);
+    self = [self initWithBaseAttributes:baseAttributes format:format arguments:args];
     va_end(args);
     return self;
 }
 
-- (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)formatString arguments:(va_list)argList
+- (instancetype)initWithBaseAttributes:(NSDictionary *)baseAttributes format:(NSString *)format arguments:(va_list)argList
 {
-    NSParameterAssert(formatString);
+    NSParameterAssert(format);
 
     /* Strategy:
      * 1. Scan: Scan format for specifiers (%@ or %n$@), building an array of each specifier's range and position.
@@ -54,7 +54,7 @@
     NSInteger maxArgumentPosition = 0;
 
     // Step 1: Scan the format string for format specifiers (while validating it).
-    NSScanner *scanner = [NSScanner scannerWithString:formatString];
+    NSScanner *scanner = [NSScanner scannerWithString:format];
     scanner.charactersToBeSkipped = nil;
     while (!scanner.isAtEnd) {
         [scanner scanUpToString:@"%" intoString:NULL];
@@ -69,12 +69,12 @@
         BOOL argumentPositionExplicit = [scanner scanInteger:&argumentPosition];
         if (argumentPositionExplicit) {
             if (![scanner scanString:@"$@" intoString:NULL]) {
-                [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (character %lu, only “%%%%”, “%%@”, and “%%1$@” are supported)", formatString, (unsigned long)percentStart];
+                [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (character %lu, only “%%%%”, “%%@”, and “%%1$@” are supported)", format, (unsigned long)percentStart];
                 return nil;
             }
 
             if (argumentPosition < 1) {
-                [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (invalid argument position %ld)", formatString, (long)argumentPosition];
+                [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (invalid argument position %ld)", format, (long)argumentPosition];
                 return nil;
             }
 
@@ -85,13 +85,13 @@
             argumentPosition = 0;
 
         } else {
-            [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (character %lu, only “%%%%”, “%%@”, and “%%1$@” are supported)", formatString, (unsigned long)percentStart];
+            [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (character %lu, only “%%%%”, “%%@”, and “%%1$@” are supported)", format, (unsigned long)percentStart];
             return nil;
         }
 
         if (maxArgumentPosition > 0) {
             if (argumentPositionExplicit != usingExplicitPositions) {
-                [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (cannot mix explicit and implicit argument positions)", formatString];
+                [NSException raise:NSInvalidArgumentException format:@"Illegal format string: “%@” (cannot mix explicit and implicit argument positions)", format];
                 return nil;
             }
         } else {
@@ -132,7 +132,7 @@
     } else {
         mutableInstance = [NSMutableAttributedString alloc];
     }
-    mutableInstance = [mutableInstance initWithString:formatString attributes:baseAttributes];
+    mutableInstance = [mutableInstance initWithString:format attributes:baseAttributes];
 
     [mutableInstance beginEditing];
     [formatRanges enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSValue *range, NSUInteger index, BOOL *stop) {

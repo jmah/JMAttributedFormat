@@ -16,9 +16,9 @@
 
 @interface NSAttributedString (JMAttributedFormat)
 
-+ (nullable instancetype)attributedStringWithFormat:(nonnull NSString *)formatString, ... NS_FORMAT_FUNCTION(1,2);
-+ (nullable instancetype)attributedStringWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)formatString, ... NS_FORMAT_FUNCTION(2,3);
-- (nullable instancetype)initWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)formatString, ... NS_FORMAT_FUNCTION(2,3);
-- (nullable instancetype)initWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)formatString arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
++ (nullable instancetype)attributedStringWithFormat:(nonnull NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
++ (nullable instancetype)attributedStringWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
+- (nullable instancetype)initWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
+- (nullable instancetype)initWithBaseAttributes:(nullable NSDictionary *)baseAttributes format:(nonnull NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
 
 @end
