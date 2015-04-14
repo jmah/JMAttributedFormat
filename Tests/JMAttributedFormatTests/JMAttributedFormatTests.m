@@ -217,6 +217,13 @@
                           @"1 234,5{\n    JMCustomClass = JMCustomAttributedDescriptionWithLocale;\n}");
 }
 
+- (void)testSubstitutingFormatSpecifiers
+{
+    NSString *fs1 = @"%@", *fs2 = @"%22$d", *fs3 = @"%";
+    NSAttributedString *as = [NSAttributedString attributedStringWithFormat:@"1 %@ 2 %@ 3 %@", fs1, fs2, fs3];
+    XCTAssertEqualObjects(as.string, @"1 %@ 2 %22$d 3 %");
+}
+
 - (void)testInvalidFormats
 {
 #pragma clang diagnostic push
