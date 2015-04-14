@@ -171,23 +171,24 @@
 - (void)testLocalizedSubstitution
 {
     NSNumber *number = @(1234.5);
+    NSString *nonLocalizedString = @"suffix";
 
     NSLocale *enUS = [NSLocale localeWithLocaleIdentifier:@"en_US"];
     NSLocale *frFR = [NSLocale localeWithLocaleIdentifier:@"fr_FR"];
 
-    NSString *plainSystem = [[NSString alloc] initWithFormat:@"format %@", number];
-    NSAttributedString *attrSystem = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@", number];
-    XCTAssertEqualObjects(plainSystem, @"format 1234.5"); // no comma
+    NSString *plainSystem = [[NSString alloc] initWithFormat:@"format %@ %@", number, nonLocalizedString];
+    NSAttributedString *attrSystem = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@ %@", number, nonLocalizedString];
+    XCTAssertEqualObjects(plainSystem, @"format 1234.5 suffix"); // no comma
     XCTAssertEqualObjects(plainSystem, attrSystem.string);
 
-    NSString *plainEnUS = [[NSString alloc] initWithFormat:@"format %@" locale:enUS, number];
-    NSAttributedString *attrEnUS = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@" locale:enUS, number];
-    XCTAssertEqualObjects(plainEnUS, @"format 1,234.5");
+    NSString *plainEnUS = [[NSString alloc] initWithFormat:@"format %@ %@" locale:enUS, number, nonLocalizedString];
+    NSAttributedString *attrEnUS = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@ %@" locale:enUS, number, nonLocalizedString];
+    XCTAssertEqualObjects(plainEnUS, @"format 1,234.5 suffix");
     XCTAssertEqualObjects(plainEnUS, attrEnUS.string);
 
-    NSString *plainFrFR = [[NSString alloc] initWithFormat:@"format %@" locale:frFR, number];
-    NSAttributedString *attrFrFR = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@" locale:frFR, number];
-    XCTAssertEqualObjects(plainFrFR, @"format 1 234,5"); // nbsp as thousands separator
+    NSString *plainFrFR = [[NSString alloc] initWithFormat:@"format %@ %@" locale:frFR, number, nonLocalizedString];
+    NSAttributedString *attrFrFR = [[NSAttributedString alloc] initWithBaseAttributes:nil format:@"format %@ %@" locale:frFR, number, nonLocalizedString];
+    XCTAssertEqualObjects(plainFrFR, @"format 1 234,5 suffix"); // nbsp as thousands separator
     XCTAssertEqualObjects(plainFrFR, attrFrFR.string);
 }
 
