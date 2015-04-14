@@ -14,37 +14,12 @@
 @interface JMAttributedFormatTests : XCTestCase
 @end
 
-
 @interface JMCustomAttributedDescription : NSObject
 @property (nonatomic) id innerValue;
 @end
 
-@implementation JMCustomAttributedDescription
-- (NSAttributedString *)attributedDescription
-{
-    if (!self.innerValue) {
-        return nil;
-    }
-    return [[NSAttributedString alloc] initWithString:[self.innerValue description] attributes:@{@"JMCustomClass": [self class]}];
-}
-@end
-
-
 @interface JMCustomAttributedDescriptionWithLocale : NSObject
 @property (nonatomic) id innerValue;
-@end
-
-@implementation JMCustomAttributedDescriptionWithLocale
-- (NSAttributedString *)attributedDescription
-{ return [self attributedDescriptionWithLocale:nil]; }
-
-- (NSAttributedString *)attributedDescriptionWithLocale:(NSLocale *)locale
-{
-    if (!self.innerValue) {
-        return nil;
-    }
-    return [[NSAttributedString alloc] initWithString:[self.innerValue descriptionWithLocale:locale] attributes:@{@"JMCustomClass": [self class]}];
-}
 @end
 
 
@@ -249,4 +224,29 @@
 #pragma clang diagnostic pop
 }
 
+@end
+
+
+@implementation JMCustomAttributedDescription
+- (NSAttributedString *)attributedDescription
+{
+    if (!self.innerValue) {
+        return nil;
+    }
+    return [[NSAttributedString alloc] initWithString:[self.innerValue description] attributes:@{@"JMCustomClass": [self class]}];
+}
+@end
+
+
+@implementation JMCustomAttributedDescriptionWithLocale
+- (NSAttributedString *)attributedDescription
+{ return [self attributedDescriptionWithLocale:nil]; }
+
+- (NSAttributedString *)attributedDescriptionWithLocale:(NSLocale *)locale
+{
+    if (!self.innerValue) {
+        return nil;
+    }
+    return [[NSAttributedString alloc] initWithString:[self.innerValue descriptionWithLocale:locale] attributes:@{@"JMCustomClass": [self class]}];
+}
 @end
