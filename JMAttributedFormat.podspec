@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "JMAttributedFormat"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "Use format strings to localize NSAttributedString"
 
   s.description  = <<-DESC
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.author             = { "Jonathon Mah" => "me@JonathonMah.com" }
   s.social_media_url   = "http://twitter.com/dev_etc"
 
-  s.source       = { :git => "https://github.com/jmah/JMAttributedFormat.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/jmah/JMAttributedFormat.git", :tag => "1.0.1" }
 
   s.source_files  = "JMAttributedFormat.{h,m}"
 
