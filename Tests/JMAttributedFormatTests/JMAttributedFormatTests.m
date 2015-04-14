@@ -230,6 +230,8 @@
 #pragma clang diagnostic ignored "-Wformat"
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"trailing %"], NSException, NSInvalidArgumentException);
 
+    XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"raw % without anything"], NSException, NSInvalidArgumentException);
+
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"mixing positional %1$@ and plain %@"], NSException, NSInvalidArgumentException);
 
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"mixing plain %@ and positional %1$@"], NSException, NSInvalidArgumentException);
@@ -239,6 +241,8 @@
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"illegal position %-1$@"], NSException, NSInvalidArgumentException);
 
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"unsupported formats %d"], NSException, NSInvalidArgumentException);
+
+    XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"unsupported positional formats %1$d"], NSException, NSInvalidArgumentException);
 
     XCTAssertThrowsSpecificNamed([NSAttributedString attributedStringWithBaseAttributes:nil format:@"unsupported positional format %1$d"], NSException, NSInvalidArgumentException);
 #pragma clang diagnostic pop
