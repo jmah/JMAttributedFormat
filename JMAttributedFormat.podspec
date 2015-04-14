@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
                    arguments, so your styled strings can be flexibly localized.
                    DESC
 
-  s.homepage     = "https://github.com/jmah/JMAttributedString"
+  s.homepage     = "https://github.com/jmah/JMAttributedFormat"
 
 
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.author             = { "Jonathon Mah" => "me@JonathonMah.com" }
   s.social_media_url   = "http://twitter.com/dev_etc"
 
-  s.source       = { :git => "https://github.com/jmah/JMAttributedString.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/jmah/JMAttributedFormat.git", :tag => "1.0.0" }
 
   s.source_files  = "JMAttributedFormat.{h,m}"
 
